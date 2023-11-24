@@ -3,8 +3,20 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+    /* f4f4f4 is white smoke  */
     background-color: #f4f4f4;
+    /* 333 is dark charcoal */
     color: #333;
+}
+
+.container {
+    margin: 20px auto;
+}
+
+.text {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: justify;
 }
 
 header {
@@ -18,11 +30,6 @@ header h1 {
     margin: 0;
 }
 
-.container {
-    width: 50%;
-    margin: auto;
-    padding-top: 20px;
-}
 
 .lists {
     padding: 0 40%;
@@ -36,8 +43,19 @@ header h1 {
 }
 
 .form input {
-    padding: 10px;
+    font-family: Arial, monospace;
+    padding: 20px;
     width: 50%;
+}
+
+.test_box {
+    border: 1px dashed #333;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.blog_list li {
+    list-style: none;
 }
 
 footer {
