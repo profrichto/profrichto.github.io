@@ -11,11 +11,34 @@ body {
     margin: 20px auto;
 }
 
+.clr {
+    clear: both;
+}
+
+
 .text {
     max-width: 500px;
     margin: 0 auto;
     text-align: justify;
 }
+
+.blog_text {
+    font-size: small;
+    max-width: 1500px;
+    width: 33.3%;
+    float: left;
+    margin: 0 auto;
+    text-align: justify;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.blog_text .margin {
+    color: #555555;
+    font-size: smaller;
+    padding: 0 25%;
+}
+
 
 header {
     background-color: #007bff;
@@ -55,6 +78,53 @@ header h1 {
 .blog_list li {
     list-style: none;
 }
+
+.blog_list li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.blog_list li a:hover {
+    text-decoration: underline;
+    color: #2600ff;
+}
+
+
+.blog_list li h2 {
+    margin: 0px;
+    margin-top: 20px;
+    padding: 0px;
+}
+
+.blog_list li p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.blog_title {
+    margin: 0px;
+    padding: 0px;
+}
+
+#main-block {
+    float: left;
+    width: 100%;
+}
+
+#sidebar {
+    float: right;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+code {
+    text-align: left;
+    padding: 0;
+    border: 1px solid #8310b9;
+    border-radius: 5px;
+}
+
 
 footer {
     text-align: center;
