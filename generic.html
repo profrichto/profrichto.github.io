@@ -37,21 +37,55 @@
                 <a href="words.html">words</a>
             </div>
         </nav>
-        <h1>Attention and Memory</h1>
+        <h1>A (mathematical) proof for never giving up.</h1>
         <div class="flex-container">
-            <div class="item leftmargin"></div>
+            <div class="item leftmargin">Clickbait.
+                <img src="https://images.unsplash.com/photo-1612391415826-fd797e08bbfd?ixid=M3wxMTI1OHwwfDF8cmFuZG9tfHx8fHx8fHx8MTY5NjMxMzg2N3w&ixlib=rb-4.0.3&q=85&w=1920"
+                    id="example-img">
+            </div>
             <div class="item">
-                <p>I add something here and this is my main content to deliver
+                <p>Our <i>'way of doing things'</i> is contained in the tiny object $\mathbf{\theta}$. This is the way
+                    we do
+                    things
+                    - this
+                    is our <u>policy</u>. Our total reward (<i>or</i> fulfillment <i>or</i> happiness) over time is
+                    captured
+                    by the
+                    function
+                    $J(\theta)$.</p>
+                <p>As learners we want to figure out an optimum <i>way of doing things</i> or
+                    <b>$\theta^*$</b> that
+                    maximizes reward in situations we expect to find ourselves in. We get to collect some experience,
+                    which is contained in the object $\tau$.
+                </p>
+                <p>
+                    In other words, we want to find $\theta^*$ as:
 
-                    $$ x + y = z $$
+                    $$ \theta^* = \arg\max_\theta J(\theta) $$
 
-                    This is an example of something that takes a lot of time to write.</p>
+                    We are sampling our experience $\tau$ from the distribution $p_\theta(\tau)$, where:
+
+                    $$ p_\theta(\tau) = p(s_1) \prod_{t=1}^T p(s_{t+1}|s_t, a_t) \pi_\theta(a_t|s_t) $$
+
+                    This is actually important - we're navigating a stochastic world using our <i>own policy</i>
+                    $\pi_\theta$. This is on-policy learning. We intend to find the best way of doing things - the
+                    optimal policy $\pi_\theta^*$, that maximizes this expected rewards:
+
+                    $$ \pi_\theta^* = \arg\max_\theta E_{\tau \sim p_{\theta}}[r(\tau)] $$
+                </p>
+
+                $$ x + y = z $$
+
+                This is an example of something that takes a lot of time to write.
+                </p>
 
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis nobis dolorem, explicabo architecto
                 facilis sunt, at dolor expedita laborum incidunt id delectus consequuntur maxime quae ratione eos
                 corporis, distinctio excepturi!
             </div>
-            <div class="item rightmargin"></div>
+            <div class="item rightmargin">
+                <p>The 'English' version that is perhaps more logical (and more readable) will be on this side.</p>
+            </div>
         </div>
 
         </div>

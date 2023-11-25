@@ -35,6 +35,15 @@ p {
     box-sizing: border-box;
 }
 
+.item img {
+    width: 100%;
+    height: auto;
+}
+
+#example-img {
+    margin-top: 50%;
+}
+
 .leftmargin {
     font-size: smaller;
     text-align: right;
