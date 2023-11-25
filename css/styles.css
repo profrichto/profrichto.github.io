@@ -1,6 +1,8 @@
 body {
     font-family: 'IBM Plex Mono', monospace;
+    font-size: small;
     text-align: center;
+    line-height: 1.4em;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -9,6 +11,16 @@ body {
 
 .container {
     margin: 20px auto;
+    overflow: hidden;
+}
+
+#navbar a {
+    font-size: 14px;
+    padding: 0 5px;
+}
+
+h1 {
+    padding-top: 20px;
 }
 
 .clr {
@@ -36,6 +48,8 @@ body {
 .blog_text .marginleft {
     color: #555555;
     font-size: smaller;
+    text-align: right;
+    line-height: 1.4em;
     padding-left: 40%;
     padding-right: 10px;
 }
@@ -43,6 +57,8 @@ body {
 .blog_text .marginright {
     color: #555555;
     font-size: smaller;
+    text-align: left;
+    line-height: 1.4em;
     padding-right: 40%;
     padding-left: 10px;
 }
