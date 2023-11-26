@@ -15,6 +15,10 @@ body {
     overflow: hidden;
 }
 
+.MathJax_Display {
+    font-weight: bold;
+}
+
 p {
     margin: 0;
     padding-top: 0;
@@ -32,7 +36,15 @@ p {
 .item {
     padding: 10px;
     width: 33.3%;
+    font-size: 13px;
+    font-weight: 450;
+    color: #131313;
+    text-align: left;
     box-sizing: border-box;
+}
+
+.item h3 {
+    margin-top: 0;
 }
 
 .item img {

@@ -44,26 +44,56 @@
                     id="example-img">
             </div>
             <div class="item">
-                <p>Our <i>'way of doing things'</i> is contained in the tiny object $\mathbf{\theta}$. This is the way
-                    we do
-                    things
-                    - this
-                    is our <u>policy</u>. Our total reward (<i>or</i> fulfillment <i>or</i> happiness) over time is
+                <h3> Setup </h3>
+                <p>Our <i>'way of doing things'</i> is contained in the object $\theta$. This decides <i>how we
+                        react</i> when given some state / situation
+                    in life $s_t$ (at time $t$). This is our "modus operandi". In other words, this
+                    $\theta$ decides that given a
+                    situation (at time $t$ situation is $s_t$) in life
+                    <i><u>how</u></i> we respond to that situation. We can of course
+                    change our strategy $\theta$ at any point in time - that's why it's a
+                    variable.
+                </p>
+
+                <p>
+                    We respond to a situation by taking an action according to the
+                    probability distribution $a_t \sim \pi_\theta(a_t | s_t)$. This distribution that spits out our
+                    actions given situations depends on $\theta$ - in other words $\theta$ is the "setting" for this
+                    distribution. This distribution we call our <u>policy</u>. </p>
+
+                <p> Our
+                    "fulfillment" <i>or</i> happiness in life is
                     captured
                     by the
                     function
-                    $J(\theta)$.</p>
-                <p>As learners we want to figure out an optimum <i>way of doing things</i> or
-                    <b>$\theta^*$</b> that
-                    maximizes reward in situations we expect to find ourselves in. We get to collect some experience,
-                    which is contained in the object $\tau$.
+                    $J(\pi_\theta)$.</p>
+                <p>As curious sincere learners we want to figure out the best <i>way of doing things</i> that makes us
+                    happiest or
+                    <b>$\pi^*_{\theta}$</b> that
+                    maximizes $J(\pi_\theta)$, where:
+
+                    $$ \theta^* = \arg\max_\theta J(\pi_\theta) $$
                 </p>
+                <h3> States, Actions and Trajectories </h3>
+                Our first state $s_1$ in life is sampled from the distribution $p(s_1)$. We then take an action $a_1$
+                according
+                to our policy distribution $a_1 \sim \pi_{\theta}(a_t = a_1 |s_t = s_1)$. We then land up in a new state
+                $s_2$ which
+                is produced by some transition distribution dependent <i>on the action $a_1$ we just took</i> and <i>the
+                    state we
+                    were
+                    previously in</i>, such that $s_t \sim p(s_{t + 1} |a_t, s_t)$ - so $s_2$ is sampled as $s_2 \sim
+                p(s_{t+1} | a_t = a_1, s_t = s_1)$.
+                This cycle continues. </p>
                 <p>
-                    In other words, we want to find $\theta^*$ as:
+                    This collection of states and actions is called a <u>trajectory</u> $\tau$:
 
-                    $$ \theta^* = \arg\max_\theta J(\theta) $$
+                    $$ \tau = (s_1, a_1, s_2, a_2, \dots, s_T, a_T) $$
 
-                    We are sampling our experience $\tau$ from the distribution $p_\theta(\tau)$, where:
+                    Now we could say that we're sampling our trajectory $\tau$ from a "trajectory" distribution
+                    $p_\theta(\tau)$ as
+                    $\tau
+                    \sim p_{\theta}(\tau)$ where:
 
                     $$ p_\theta(\tau) = p(s_1) \prod_{t=1}^T p(s_{t+1}|s_t, a_t) \pi_\theta(a_t|s_t) $$
 
@@ -74,14 +104,148 @@
                     $$ \pi_\theta^* = \arg\max_\theta E_{\tau \sim p_{\theta}}[r(\tau)] $$
                 </p>
 
-                $$ x + y = z $$
-
-                This is an example of something that takes a lot of time to write.
+                <p>This is actually important - we’re navigating a stochastic environment using <em>our own policy</em>
+                    <span class="math inline"><em>π</em><sub><em>θ</em></sub></span>. This is on-policy learning. We
+                    intend to find the best way of doing things - the optimal policy <span
+                        class="math inline"><em>π</em><sub><em>θ</em><sup>*</sup></sub></span> that maximizes this
+                    expected reward:
                 </p>
-
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis nobis dolorem, explicabo architecto
-                facilis sunt, at dolor expedita laborum incidunt id delectus consequuntur maxime quae ratione eos
-                corporis, distinctio excepturi!
+                <p><span class="math display">$$\begin{aligned}
+                        \boldsymbol{\theta^{*}} &amp;= \arg\max_{\boldsymbol{\theta}} \mathbb{E}_{\boldsymbol{\tau} \sim
+                        p_{\boldsymbol{\theta}}} \left[ r(\tau) \right] \\\end{aligned}$$</span></p>
+                <p>Improving our objective with respect to our policy <span class="math inline"> θ </span>:</p>
+                <p><span class="math display">$$\begin{aligned}
+                        \nabla_\theta J(\theta) &amp;= \nabla_\theta \int_{\tau}^{}{p_\theta }{r(\tau)}\,d\tau\\
+                        &amp;= \int_{\tau}^{}{\nabla_\theta p_\theta } {r(\tau)}\,d\tau\\
+                        &amp;= \int_{\tau}^{}{\pi_\theta \nabla_\theta \log \pi_\theta } {r(\tau)} \,d\tau\\
+                        &amp;= \mathbb{E}_{\tau \sim \pi_\theta}\left[\nabla_\theta \log \pi_\theta
+                        r(\tau)\right]\end{aligned}$$</span></p>
+                <p>A subtle but beautiful point here is that we’re actually tuning our *continuous* <span
+                        class="math inline"> θ </span> knob for *discrete* rewards [flappy birds can go
+                    over chunky pipes, and mario can collect chunky coins] that we collect along our trajectory (applies
+                    for continuous rewards too). We can do this by taking the gradient of <span class="math inline"> J (
+                        θ ) </span>
+                    with respect to <span class="math inline"> θ </span> and then moving in the direction
+                    of the gradient.</p>
+                <p>Our integral here is a sum in <span class="math inline"> τ </span> space - a sum over
+                    all possible trajectories. Not so nice (unless quantum Markov algorithms can compute integrals over
+                    multiple trajectories concurrently?). We approximate this expectation through sampling:</p>
+                <p><span class="math display">$$\begin{aligned}
+                        \nabla_\theta J(\theta) &amp;= \frac{1}{N} \sum_{i=1}^{N} \nabla_\theta \log \pi_\theta(\tau_i)
+                        {r(\tau_i)}\\
+                        \nabla_\theta J(\theta) &amp;= \frac{1}{N} \sum_{i=1}^{N} \sum_{t=1}^{T}{} \nabla_\theta \log
+                        \pi_\theta(a_t | s_t) \sum_{t=1}^{T}{} r_t\end{aligned}$$</span></p>
+                <p>This estimator in its current form is extremely low bias and extremely high variance - approaching
+                    true gradient when we’ve sampled infinite (all) trajectories. Due to this being high variance, we
+                    can very easily veer off optimal policies during optimization.</p>
+                <p>But what is the expression actually saying?</p>
+                <p>It tells me how how to change my ’ways’ <span class="math inline"> θ </span>. It’s
+                    giving me the direction to go in <span class="math inline"> θ </span> space, such
+                    that my expected reward <em>when I follow <span class="math inline"> θ </span>
+                        policy</em> is maximized.</p>
+                <p>We go through each <span class="math inline"> s <sub> t </sub></span>
+                    observed in our trajectory and keep note of the direction in <span class="math inline"> θ </span>
+                    space we should move in <em>if</em> we wanted to
+                    weigh (increase/decrease) log likelihood of the action we took (by total reward), given we encounter
+                    that state again.</p>
+                <p>One could argue that the true value of a trajectory can only be known if one actually follows it to
+                    the end - a thought both scary and reassuring at the same time. No one knows the right answer.</p>
+                <p>But we’re going to resort to extrapolating our policy from only a few trajectories - that we could
+                    then use in previously seen and unseen states.</p>
+                <h1 class="unnumbered" id="reward-to-go">Reward-to-Go</h1>
+                <p>To reduce variance, a suggestion is to weigh the desired log-likehood change (via tuning <span
+                        class="math inline"> θ </span>) only by the rewards we get from now onwards -
+                    ignoring rewards earned in the past. So we intend to increase/decrease log-likelihood of our action
+                    taken <em>now</em> (given we encounter this state again) *only* by the rewards we get from <em>now
+                        onwards</em>.</p>
+                <p>This is an acknowledgement of the fact that the action we take now has <em>nothing to do with the
+                        rewards earned in the past</em>.</p>
+                <p>But can we show mathematically that we can ignore these?:</p>
+                <p><span class="math display">$$\begin{aligned}
+                        \nabla_\theta J(\theta) &amp;= \mathbb{E}_{\boldsymbol{a_t | s_t} \sim\pi_\theta}\left[
+                        \sum_{t=1}^{T}{} \nabla_\theta \log \pi_\theta(a_t | s_t) \sum_{t=1}^{T}{} r_t \right] \\
+                        &amp;= \mathbb{E}_{\boldsymbol{a_t | s_t} \sim\pi_\theta}\left[ \sum_{t=1}^{T}{} \nabla_\theta
+                        \log \pi_\theta(a_t | s_t) \biggl(\sum_{t'=0}^{t-1}{} r_{t'} + \sum_{t'=t}^{T}{} r_{t'}
+                        \biggr)\right] \\
+                        &amp;\stackrel{?}{=} \mathbb{E}_{\boldsymbol{a_t | s_t} \sim\pi_\theta}\left[ \sum_{t=1}^{T}{}
+                        \nabla_\theta \log \pi_\theta(a_t | s_t) \sum_{t'=t}^{T}{} r_{t'} \right]
+                        \\\end{aligned}$$</span></p>
+                <p>In other words we have to show:</p>
+                <p><span class="math display">$$\begin{aligned}
+                        \mathbb{E}_{\boldsymbol{a_t | s_t} \sim\pi_\theta}\left[ \sum_{t=1}^{T}{} \nabla_\theta \log
+                        \pi_\theta(a_t | s_t) \sum_{t'=0}^{t-1}{} r_{t'} \right] &amp;= 0\end{aligned}$$</span></p>
+                <p>Let’s go ahead and show that.<br />
+                </p>
+                <div class="lemma">
+                    <p> Lemma 1 . <em>Given a probability distribution <span class="math inline"><em>P</em><sub> θ
+                                </sub></span> and random variable
+                            <span class="math inline"><em>X</em></span>, such that <span
+                                class="math inline"><em>X</em> ∼ <em>P</em><sub> θ </sub></span>, we
+                            have: <span class="math display">$$\begin{aligned}
+                                \mathbb{E}_{X \sim P_\theta}\left[\nabla_\theta \log P_\theta(X)\right] = 0
+                                \end{aligned}$$</span></em></p>
+                </div>
+                <p>Proof:</p>
+                <p><span class="math display">$$\begin{aligned}
+                        \int_{x}^{}{P_\theta}\,dx &amp;= 1\\ \end{aligned}$$</span></p>
+                <p>Taking gradient of both sides: <span class="math display">$$\begin{aligned}
+                        \nabla_\theta \int_{x}^{}{P_\theta}\,dx &amp;= \nabla_\theta 1\\\end{aligned}$$</span></p>
+                <p>Given gradient of <span class="math inline"><em>P</em><sub><em>θ</em></sub></span> exists almost
+                    everywhere:</p>
+                <p><span class="math display">$$\begin{aligned}
+                        \int_{x}^{}{\nabla_\theta P_\theta}\,dx &amp;= 0 \\
+                        \int_{x}^{}{P_\theta\nabla_\theta \log P_\theta}\,dx &amp;= 0 \\
+                        \mathbb{E}_{P_\theta}\left[\nabla_\theta \log P_\theta\right] &amp;= 0 \\\end{aligned}$$</span>
+                </p>
+                <p>————————-<br />
+                    Now, let’s look at our original expectation. The reward <span
+                        class="math inline"><em>r</em><sub><em>t</em>′</sub></span> for time <span
+                        class="math inline"><em>t</em> − 1</span> is the reward obtained at time step <span
+                        class="math inline"><em>t</em> − 1</span> after taking action <span
+                        class="math inline"><em>a</em><sub><em>t</em> − 1</sub></span> in state <span
+                        class="math inline"><em>s</em><sub><em>t</em> − 1</sub></span>:</p>
+                <p><span class="math display">$$\begin{aligned}
+                        &amp; \mathbb{E}_{\boldsymbol{a_t | s_t}\sim\pi_\theta}\left[ \sum_{t=1}^{T}{} \nabla_\theta
+                        \log \pi_\theta(a_t | s_t) \sum_{t'=0}^{t-1}{} r_{t'} \right] \\
+                        \end{aligned}$$</span></p>
+                <p>Let’s condition the entire expectation on the state exactly at <span
+                        class="math inline"><em>t</em></span>, <span
+                        class="math inline"><em>s</em><sub><em>t</em></sub></span> and expand it using iterated
+                    expectations:</p>
+                <p><span class="math display">$$\begin{aligned}
+                        &amp; \mathbb{E}_{s_t}\left[\mathbb{E}_{\boldsymbol{a_t | s_t}\sim\pi_\theta}\left[
+                        \sum_{t=1}^{T}{} \nabla_\theta \log \pi_\theta(a_t | s_t) \sum_{t'=0}^{t-1}{} r_{t'} \right] |
+                        s_t\right] \\
+                        &amp;= \mathbb{E}_{s_t}\left[\sum_{t=1}^{T}{}\mathbb{E}_{a_t | s_t\sim\pi_\theta}\left[
+                        \nabla_\theta \log \pi_\theta(a_t | s_t) \sum_{t'=0}^{t-1}{} r_{t'} \right] | s_t\right] \\
+                        \end{aligned}$$</span></p>
+                <p>Now given <span class="math inline"><em>s</em><sub><em>t</em></sub></span> is fixed, the random
+                    variable <span
+                        class="math inline">∇<sub><em>θ</em></sub>log <em>π</em><sub><em>θ</em></sub>(<em>a</em><sub><em>t</em></sub>|<em>s</em><sub><em>t</em></sub>)</span>
+                    is conditionally independent of the random variable involving <span
+                        class="math inline">$\sum_{t'=0}^{t-1}{} r_{t'}$</span> for any <span
+                        class="math inline"><em>t</em>′ &lt; <em>t</em></span> given <span
+                        class="math inline"><em>s</em><sub><em>t</em></sub></span>.<br />
+                    In plain english, the probability of an action taken now is independent of past rewards if we
+                    already know the current state. By definition, the ’state’ is Markovian in nature and contains all
+                    information needed to predict future states. So we can distribute the inner expectation as:</p>
+                <p><span class="math display">$$\begin{aligned}
+                        &amp; \mathbb{E}_{s_t}\left[\sum_{t=1}^{T}{}\mathbb{E}_{a_t | s_t\sim\pi_\theta}\left[
+                        \nabla_\theta \log \pi_\theta(a_t | s_t) \right] \mathbb{E}_{a_{t'} |
+                        s_{t'}\sim\pi_\theta}\left[ \sum_{t'=0}^{t-1}{} r_{t'} | s_t\right] \right] \\
+                        \end{aligned}$$</span></p>
+                <p>Using Lemma 1, the first expectation in the inner expectation is zero:</p>
+                <p><span class="math display">$$\begin{aligned}
+                        &amp; \mathbb{E}_{a_t|s_t \sim\pi_\theta}\left[ \nabla_\theta \log \pi_\theta(a_t | s_t) \right]
+                        = 0 \\
+                        \end{aligned}$$</span></p>
+                <p>so the entire expectation is zero. <span class="math inline">▫</span><br />
+                    <br />
+                    The past is gone. What could be gained (or lost) in the past doesn’t matter. Now matters. And the
+                    future matters. That’s it.<br />
+                    <br />
+                    Onwards and upwards.
+                </p>
             </div>
             <div class="item rightmargin">
                 <p>The 'English' version that is perhaps more logical (and more readable) will be on this side.</p>
