@@ -53,7 +53,16 @@ p {
 }
 
 #example-img {
-    margin-top: 50%;
+    margin-top: 500%;
+    filter: brightness(93%);
+}
+
+#happiness-quote {
+    margin-top: 400%;
+}
+
+#quantum-quote {
+    margin-top: 1100%;
 }
 
 .leftmargin {
@@ -70,6 +79,10 @@ p {
     color: #636363;
     max-width: 250px;
     box-sizing: border-box;
+}
+
+#navbar {
+    text-align: center;
 }
 
 #navbar a {
@@ -120,6 +133,7 @@ h1 {
     margin: 0px;
     margin-top: 20px;
     padding: 0px;
+    text-align: center;
 }
 
 .blog_list li p {

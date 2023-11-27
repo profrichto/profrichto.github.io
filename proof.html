@@ -43,8 +43,9 @@
         <h1>The (mathematical) why for not giving up.</h1>
         <div class="flex-container">
             <div class="item leftmargin">Not really. But maybe.
-                <!-- <img src="https://images.unsplash.com/photo-1612391415826-fd797e08bbfd?ixid=M3wxMTI1OHwwfDF8cmFuZG9tfHx8fHx8fHx8MTY5NjMxMzg2N3w&ixlib=rb-4.0.3&q=85&w=1920" -->
-                <!-- id="example-img"> -->
+                <img src="https://i0.wp.com/dariusforoux.com/wp-content/uploads/2019/11/happiness-is-the-way.png?fit=1200%2C900&ssl=1"
+                    id="example-img">
+                <p id="happiness-quote">"Happiness can be discrete."</p>
             </div>
             <div class="item">
                 <md-block rendered="content">
@@ -67,14 +68,13 @@
 
                     $$s_1 \sim p(s_1)$$
 
-                    Now our *response* as explained above would be sampled from our "policy" (*read* behaviour
-                    probability distribution):
+                    Now our *response* as explained above would be sampled from our behaviour distribution:
 
                     $$a_1 \sim \pi_{\theta}(a_t = a_1 | s_t = s_1)$$
 
                     After taking action $a_1$ we land up in some state $s_2$. Which state is this? Let's assume that
-                    this state is sampled from some "transition" probability distribution that spits out a state *given
-                    some state* and *action taken*. This represents the randomness of the world. So we have:
+                    this state is sampled from some "state transition" probability distribution that spits out a state
+                    *given some state* and *action taken*. This represents the randomness of the world. So we have:
 
                     $$ s_{t+1} \sim p(s_{t+1} | a_t, s_t)$$
 
@@ -102,7 +102,7 @@
                     $$ J(\pi_\theta) = \mathbb{E}_{\tau \sim p_{\theta}(\tau)}[\sum_{t} r_t]$$
 
                     where $r_t$ is the reward / happiness / fullfillment we get <u>at</u> time $t$. $J$ then is
-                    basically quantifying the sum of "happiness's" we're getting over all time. The expectation is
+                    basically quantifying the sum of mini-"happiness's" we're getting over all time. The expectation is
                     because we're navigating a probabilistic world.
 
                     As sincere and curious learners we want to figure out the best *way of doing things* that would make
@@ -142,7 +142,8 @@
                     too).
 
                     Our integral above is a sum in $\tau$ space - which is a sum over all
-                    possible trajectories. This is not nice at all because we'd have to sum over all possible
+                    possible trajectories. This is not nice at all<sup>*</sup> because we'd have to sum over all
+                    possible
                     trajectories to get our gradient <u>at</u> current $\theta$ . Let's
                     approximate the above expectation through sampling a few '$N$' trajectories:
 
@@ -170,16 +171,17 @@
                     the direction to go in $\theta$ space, such that my expected fulfillment $J$ is maximized.
 
                     We go through each $\ {s_t}$ observed in our trajectory and
-                    take note of the direction in $\theta$ space we should move in *if*
-                    we wanted to reweigh (increase/decrease) the probability the action we
-                    took, if we encounter that state again.
+                    take note of the direction in $\theta$ space we should move and
+                    *reweigh* (increase/decrease) the probability the action we
+                    took, increase it if the trajectory gave us "happiness" and decrease it if the trajectory gave us
+                    "sadness".
 
                     One could argue that the true value of a trajectory can only be known if
                     one actually follows it to the end - a thought both scary and reassuring
                     at the same time. No one knows the right answer.
 
                     But we're going to resort to extrapolating our *optimized* behaviour from only a few
-                    trajectories - that we could then use in both previously seen and unseen
+                    trajectories - that we could then use in both previously seen <u>and</u> unseen
                     states.
 
                     ### Can we ignore the past?
@@ -295,7 +297,8 @@
                     future matters. </md-block>
             </div>
             <div class="item rightmargin">
-                <!-- <p>The 'English' version that is perhaps more logical (and more readable) will be on this side.</p> -->
+                <p id="quantum-quote"> <sup>*</sup>unless quantum computers figure out monte carlo
+                    integration?</p>
             </div>
         </div>
 
