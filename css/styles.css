@@ -29,12 +29,12 @@ p {
     display: flex;
     justify-content: center;
     text-align: justify;
-    padding: 10px;
+    padding: 0 10px;
     box-sizing: border-box;
 }
 
 .item {
-    padding: 10px;
+    padding: 0 10px;
     width: 33.3%;
     font-size: 13px;
     font-weight: 450;
@@ -82,7 +82,13 @@ p {
 }
 
 #navbar {
+    /* margin-top: 2%; */
     text-align: center;
+}
+
+.blog_title {
+    margin: 2.5% 0;
+    padding: 0px;
 }
 
 #navbar a {
@@ -92,9 +98,10 @@ p {
 
 h1 {
     padding-top: 20px;
+    /* text-decoration: underline dotted; */
 }
 
-.clr {
+*/ .clr {
     clear: both;
 }
 
@@ -141,7 +148,7 @@ h1 {
     padding: 0px;
 }
 
-.blog_title {
+.blog_list_title {
     margin: 0px;
     padding: 0px;
 }

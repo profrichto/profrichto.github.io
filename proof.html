@@ -34,17 +34,19 @@
 
 <body>
     <main>
+        <h1></h1>
         <nav id="navbar">
             <div class="container">
                 <a href="index.html">about</a>
                 <a href="words.html">words</a>
+                <a href="letters.html">letters</a>
             </div>
         </nav>
-        <h1>The (mathematical) why for not giving up.</h1>
+        <h1 class="blog_title">The (mathematical) why for not giving up.</h1>
         <div class="flex-container">
             <div class="item leftmargin">Not really. But maybe.
-                <img src="https://i0.wp.com/dariusforoux.com/wp-content/uploads/2019/11/happiness-is-the-way.png?fit=1200%2C900&ssl=1"
-                    id="example-img">
+                <!-- <img src="https://i0.wp.com/dariusforoux.com/wp-content/uploads/2019/11/happiness-is-the-way.png?fit=1200%2C900&ssl=1"
+                    id="example-img"> -->
                 <p id="happiness-quote">"Happiness can be discrete."</p>
             </div>
             <div class="item">
@@ -84,7 +86,8 @@
 
                     $$\tau = (s_1, a_1, s_2, a_2, \dots, s_T) $$
 
-                    Another way of saying the above is that we are sampling our trajectories from some "trajectory"
+                    Another way of saying the above could be that we are sampling our trajectories from some
+                    "trajectory"
                     distribution as $\tau \sim p_{\theta}(\tau)$ (instead of breaking down our sampling as sampling from
                     policy {or *action distribution*} and transition distribuion {or *states distribution*}).
 
@@ -228,9 +231,8 @@
 
                     Let's go ahead and show that.
 
-                    ### Proof
+                    ### An epiphany or two
 
-                    -------------------------\
                     **Lemma:** Given a probability distribution $P_{\ {\theta}}$
                     and random variable $X$, such that $X \sim P_{\ {\theta}}$, we
                     have:
@@ -254,7 +256,7 @@
                     \int_{x}^{}{P_\theta\nabla_\theta \log P_\theta}\,dx &= 0 \\
                     \mathbb{E}_{P_\theta}\left[\nabla_\theta \log P_\theta\right] &= 0 \\\end{aligned}$$
 
-                    -------------------------
+                    ---------------------------------\-
 
                     Now, let's look at our original expectation. The happiness / reward $r_{t'}$ for
                     time $t-1$ is the one obtained at time step $t-1$ after taking action
