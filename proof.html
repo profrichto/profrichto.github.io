@@ -5,32 +5,23 @@
     <title>Attention and Memory</title>
     <link rel="stylesheet" href="css/styles.css">
 
-    <!-- MathJax stuff -->
-    <script id="MathJax-script" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js?delayStartupUntil=configured"></script>
-    <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
-            }
-        };
-    </script>
+    <!-- Katex stuff -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+        integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 
-    <!-- Source code rendering stuff -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            document.querySelectorAll('code').forEach((block) => {
-                hljs.highlightBlock(block);
-            });
-        });
-    </script> -->
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+        integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+        crossorigin="anonymous"></script>
 
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
     <script type="module" src="https://md-block.verou.me/md-block.js"></script>
-
-
 </head>
+
+
 
 <body>
     <main>
@@ -47,7 +38,7 @@
             <div class="item leftmargin">Not really. But maybe.
                 <!-- <img src="https://i0.wp.com/dariusforoux.com/wp-content/uploads/2019/11/happiness-is-the-way.png?fit=1200%2C900&ssl=1"
                     id="example-img"> -->
-                <p id="happiness-quote">"Happiness can be discrete <br>( ... even amidst seemingly continuous ennui)."
+                <p id="happiness-quote">"Happiness can be discrete <br>( ... even when melancholy seems continuous)."
                 </p>
             </div>
             <div class="item">
@@ -55,18 +46,20 @@
                     ### Setup: States and Actions
 
                     Our 'way of doing things' is contained in the object
-                    $\theta$. This decides *how we react* when given some state / situation in life $s_t$ (at time $t$).
+                    \(\theta\). This decides *how we react* when given some state / situation in life \(s_t\) (at time
+                    \(t\)).
 
-                    We respond to a situation by taking an action according to the probability distribution $a_t \sim
-                    \pi_{\theta}(a_t|s_t)$. This distribution, which depends on $\theta$, represents our "behaviour" and
-                    spits out our responding "action" given the situation $s_t$. The object $\theta$ is the
+                    We respond to a situation by taking an action according to the probability distribution \(a_t \sim
+                    \pi_{\theta}(a_t|s_t)\). This distribution (which depends on \(\theta\)) represents our "behaviour"
+                    and
+                    spits out our responding "action" given the situation \(s_t\). The object \(\theta\) is the
                     "configuration"
                     (*or* strategy) for our behaviour.
 
-                    We can tune our behaviour - by changing $\theta$ which in turn changes our behaviour (distribution
-                    for actions) $\pi_\theta(a_t|s_t)$.
+                    We can tune our behaviour - by changing \(\theta\) which in turn changes our behaviour (distribution
+                    for actions) \(\pi_\theta(a_t|s_t)\).
 
-                    Let's assume our first state $s_1$ is sampled from some distribution of initial states $p(s_1)$.
+                    Let's assume our first state \(s_1\) is sampled from some distribution of initial states \(p(s_1)\).
                     This state would be the cards we're dealt in life:
 
                     $$s_1 \sim p(s_1)$$
@@ -75,7 +68,7 @@
 
                     $$a_1 \sim \pi_{\theta}(a_t = a_1 | s_t = s_1)$$
 
-                    After taking action $a_1$ we land up in some state $s_2$. Which state is this? Let's assume that
+                    After taking action \(a_1\) we land up in some state \(s_2\). Which state is this? Let's assume that
                     this state is sampled from some "state transition" probability distribution that spits out a state
                     *given some state* and *action taken*. This represents the randomness of the world. So we have:
 
@@ -83,13 +76,14 @@
 
                     And so the cycle continues.
 
-                    This collection of specific actions taken and states landed on is a <u>trajectory</u> $\tau$:
+                    This collection of specific actions taken and states landed on is a <u>trajectory</u> \(\tau\):
 
                     $$\tau = (s_1, a_1, s_2, a_2, \dots, s_T) $$
 
                     Another way of saying the above could be that we are sampling our trajectories from some
                     "trajectory"
-                    distribution as $\tau \sim p_{\theta}(\tau)$ (instead of breaking down our sampling as sampling from
+                    distribution as \(\tau \sim p_{\theta}(\tau)\) (instead of breaking down our sampling as sampling
+                    from
                     policy {or *action distribution*} and transition distribuion {or *states distribution*}).
 
                     Since both approaches are saying the same thing, we can say that:
@@ -99,37 +93,40 @@
 
                     ### Goal: Happiness and fulfillment
 
-                    Our "fulfillment" (*read* happiness) is captured by the function $J(\pi_{\theta})$. This
-                    "fulfillment" function $J$ depends on the actions we take in life and hence depends on our behaviour
-                    $\pi_{\theta}$. More precisely $J(\pi_\theta)$ is:
+                    Our "fulfillment" (*read* happiness) is captured by the function \(J(\pi_{\theta})\). This
+                    "fulfillment" function \(J\) depends on the actions we take in life and hence depends on our
+                    behaviour
+                    \(\pi_{\theta}\). More precisely \(J(\pi_\theta)\) is:
 
                     $$ J(\pi_\theta) = \mathbb{E}_{\tau \sim p_{\theta}(\tau)}[\sum_{t} r_t]$$
 
-                    where $r_t$ is the reward / happiness / fullfillment we get <u>at</u> time $t$. $J$ then is
+                    where \(r_t\) is the reward / happiness / fullfillment we get <u>at</u> time \(t\). \(J\) then is
                     basically quantifying the sum of mini-"happiness's" we're getting over all time. The expectation is
                     because we're navigating a probabilistic world.
 
                     As sincere and curious learners we want to figure out the best *way of doing things* that would make
-                    us happiest. More mathematically, we want to figure out behaviour optimum $\pi^*_{\theta}$ that
-                    maximizes $J$, as:
+                    us happiest. More mathematically, we want to figure out behaviour optimum \(\pi^*_{\theta}\) that
+                    maximizes \(J\), as:
 
                     $$ \pi^*_{\theta} = \arg\max_{\pi_\theta} J(\pi_{\theta}) $$
 
                     $$ = \arg\max_{\pi_{\theta}} \mathbb{E}_{p_{\theta}(\tau)}[\sum_{t} r_t] $$
                     $$ = \arg\max_{\pi_{\theta}} \mathbb{E}_{p_{\theta}(\tau)}[r_{\tau}] $$
 
-                    Here I've just written the cumulative happiness over time $\sum_t r_t$ as $r_{\tau}$, the cumulative
+                    Here I've just written the cumulative happiness over time \(\sum_t r_t\) as \(r_{\tau}\), the
+                    cumulative
                     happiness over trajectory (same thing).
 
                     ### Trying and learning
 
-                    So reiterating we're navigating this stochastic world using our current behaviour $\pi_\theta$.
+                    So reiterating we're navigating this stochastic world using our current behaviour \(\pi_\theta\).
 
-                    If we somehow have the gradient $\nabla_{\theta}J(\pi_\theta)$ we would get a sense of how to tune
-                    our $\theta$ so that our fulfillment $J(\pi_\theta)$ increases. By moving $\theta$ in the direction
-                    of $\nabla_{\theta} J(\pi_{\theta})$ we would move in the direction of increasing $J$.
+                    If we somehow have the gradient \(\nabla_{\theta}J(\pi_\theta)\) we would get a sense of how to tune
+                    our \(\theta\) so that our fulfillment \(J(\pi_\theta)\) increases. By moving \(\theta\) in the
+                    direction
+                    of \(\nabla_{\theta} J(\pi_{\theta})\) we would move in the direction of increasing \(J\).
 
-                    The gradient $\nabla_{\theta}J(\pi_\theta)$ is:
+                    The gradient \(\nabla_{\theta}J(\pi_\theta)\) is:
 
                     $$\begin{aligned}
                     \nabla_\theta J(\pi_\theta) &= \nabla_\theta \mathbb{E}_{p_{\theta}}[r_{\tau}] \\
@@ -140,16 +137,16 @@
                     r(\tau)\right]\end{aligned}$$
 
                     A subtle but beautiful point here is that we're actually tuning our
-                    <u>*continuous*</u> $\theta$ knob for <u>*discrete*</u> rewards [Mario can collect chunky coins,
+                    <u>*continuous*</u> \(\theta\) knob for <u>*discrete*</u> rewards [Mario can collect chunky coins,
                     Atari can have discrete points, and we can be happy in discrete bursts]
                     that we collect along our trajectory (applies for continuous rewards
                     too).
 
-                    Our integral above is a sum in $\tau$ space - which is a sum over all
+                    Our integral above is a sum in \(\tau\) space - which is a sum over all
                     possible trajectories. This is not nice at all<sup>*</sup> because we'd have to sum over all
                     possible
-                    trajectories to get our gradient <u>at</u> current $\theta$ . Let's
-                    approximate the above expectation through sampling a few '$N$' trajectories:
+                    trajectories to get our gradient <u>at</u> current \(\theta\) . Let's
+                    approximate the above expectation through sampling a few '\(N\)' trajectories:
 
                     $$\begin{aligned}
                     \nabla_\theta J(\theta) &\approx \frac{1}{N} \sum_{i=1}^{N} \nabla_\theta \log \pi_\theta(\tau_i)
@@ -158,7 +155,7 @@
                     \sum_{t=1}^{T}{} r_t\end{aligned}$$
 
                     This estimator in its current form is extremely low bias and extremely
-                    high variance. Why is it high variance? Because the quantity inside the sum $\sum^{N}_{i=1}$ can
+                    high variance. Why is it high variance? Because the quantity inside the sum \(\sum^{N}_{i=1}\) can
                     vary a lot depending on which trajectory we landed up in. Life trajectories can be pretty diverse
                     and so the corresponding happiness over each trajectory can be pretty diverse too.
 
@@ -166,16 +163,16 @@
                     (all) trajectories.
 
                     Due to this being high variance, we can very easily
-                    veer off finding potential optimal behaviours $\pi^*_{\theta}$ when doing the optimization using
+                    veer off finding potential optimal behaviours \(\pi^*_{\theta}\) when doing the optimization using
                     this approximation.
 
                     But what is the expression actually saying?
 
-                    It tells me how how to change my 'ways' $\theta$. It's giving me
-                    the direction to go in $\theta$ space, such that my expected fulfillment $J$ is maximized.
+                    It tells me how how to change my 'ways' \(\theta\). It's giving me
+                    the direction to go in \(\theta\) space, such that my expected fulfillment \(J\) is maximized.
 
-                    We go through each $\ {s_t}$ observed in our trajectory and
-                    take note of the direction in $\theta$ space we should move and
+                    We go through each \(s_t\) observed in our trajectory and
+                    take note of the direction in \(\theta\) space we should move and
                     *reweigh* (increase/decrease) the probability the action we
                     took, increase it if the trajectory gave us "happiness" and decrease it if the trajectory gave us
                     "sadness".
@@ -199,10 +196,10 @@
                     \sum_{t=1}^{T}{} r_t\end{aligned}$$
 
                     Examining the terms inside the sum, we can say that
-                    <u>at each timestep</u> $t$ we're reweighing (increasing / decreasing) the probability of that
+                    <u>at each timestep</u> \(t\) we're reweighing (increasing / decreasing) the probability of that
                     "action" taken by the total happiness obtained over the entire trajectory. More precisely, we're
-                    moving in $\theta$-space according to $\nabla_{\theta} \log \pi_{\theta}(a_t|s_t)$ multiplied by
-                    cumulative reward over <u>entire</u> trajectory which is $\sum^{T}_{t=1} r_t$.
+                    moving in \(\theta\)-space according to \(\nabla_{\theta} \log \pi_{\theta}(a_t|s_t)\) multiplied by
+                    cumulative reward over <u>entire</u> trajectory which is \(\sum^{T}_{t=1} r_t\).
 
                     We need to reduce the quantity inside our estimator to reduce variance. A suggestion is to only
                     count future happiness when evaluating the importance of the current action - thereby ignoring
@@ -234,8 +231,8 @@
 
                     ### Epiphanies emergent
 
-                    **Lemma:** Given a probability distribution $P_{\ {\theta}}$
-                    and random variable $X$, such that $X \sim P_{\ {\theta}}$, we
+                    **Lemma:** Given a probability distribution \(P_{\ {\theta}}\)
+                    and random variable \(X\), such that \(X \sim P_{\ {\theta}}\), we
                     have:
 
                     $$\begin{aligned}
@@ -250,7 +247,7 @@
                     $$\begin{aligned}
                     \nabla_\theta \int_{x}^{}{P_\theta}\,dx &= \nabla_\theta 1\\\end{aligned}$$
 
-                    Given gradient of $P_\theta$ exists almost everywhere:
+                    Given gradient of \(P_\theta\) exists almost everywhere:
 
                     $$\begin{aligned}
                     \int_{x}^{}{\nabla_\theta P_\theta}\,dx &= 0 \\
@@ -259,17 +256,17 @@
 
                     ---------------------------------\-
 
-                    Now, let's look at our original expectation. The happiness / reward $r_{t'}$ for
-                    time $t-1$ is the one obtained at time step $t-1$ after taking action
-                    $a_{t-1}$ in state $s_{t-1}$:
+                    Now, let's look at our original expectation. The happiness / reward \(r_{t'}\) for
+                    time \(t-1\) is the one obtained at time step \(t-1\) after taking action
+                    \(a_{t-1}\) in state \(s_{t-1}\):
 
                     $$\begin{aligned}
                     & \mathbb{E}_{\ {a_t | s_t}\sim\pi_\theta}\left[ \sum_{t=1}^{T}{} \nabla_\theta \log \pi_\theta(a_t
                     | s_t) \sum_{t'=0}^{t-1}{} r_{t'} \right] \\
                     \end{aligned}$$
 
-                    Let's condition the entire expectation on the state exactly at $t$,
-                    $s_t$ using iterated expectations and linearity of expectations. So the quantity above can be
+                    Let's condition the entire expectation on the state exactly at \(t\),
+                    \(s_t\) using iterated expectations and linearity of expectations. So the quantity above can be
                     written as:
 
                     $$\begin{aligned}
@@ -279,10 +276,10 @@
                     \log \pi_\theta(a_t | s_t) \sum_{t'=0}^{t-1}{} r_{t'} \right] | s_t\right] \\
                     \end{aligned}$$
 
-                    Now given $s_t$ is fixed, the random variable
-                    $\nabla_\theta \log \pi_\theta(a_t|s_t)$ is conditionally independent of
-                    the random variable involving $\sum_{t'=0}^{t-1}{} r_{t'}$ for any
-                    $t'\leq t$ given $s_t$.
+                    Now given \(s_t\) is fixed, the random variable
+                    \(\nabla_\theta \log \pi_\theta(a_t|s_t)\) is conditionally independent of
+                    the random variable involving \(\sum_{t'=0}^{t-1}{} r_{t'}\) for any
+                    \(t'\leq t\) given \(s_t\).
 
                     In plain english, the value of an action taken now for total happiness is
                     independent of past happiness if we already know our current state. By definition, the 'state'
@@ -293,7 +290,7 @@
                     \sum_{t'=0}^{t-1}{} r_{t'} | s_t\right] \right] \\ \end{aligned}$$ Using Lemma, the first
                     expectation in the inner expectation is zero: $$\begin{aligned} & \mathbb{E}_{a_t|s_t
                     \sim\pi_\theta}\left[ \nabla_\theta \log \pi_\theta(a_t | s_t) \right]=0 \\ \end{aligned}$$ so
-                    the entire expectation is zero. $\square$
+                    the entire expectation is zero. \(\square\)
 
                     The past is gone. What could be gained (or lost) in
                     the past has no bearing on how you change your behaviour now (to be happier). Now matters. And the
