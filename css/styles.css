@@ -96,6 +96,11 @@ p {
     padding: 0 5px;
 }
 
+#navbar a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 h1 {
     padding-top: 20px;
     /* text-decoration: underline dotted; */
@@ -118,6 +123,28 @@ h1 {
     padding: 0 40%;
     text-align: center;
     text-justify: auto;
+}
+
+.interests_para {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
+    font-weight: 450;
+}
+
+.interests {
+    display: inline;
+}
+
+.interests a {
+    text-decoration: underline;
+    color: #140084;
+}
+
+.interests a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #140084;
 }
 
 
