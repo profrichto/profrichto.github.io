@@ -302,11 +302,19 @@
             </div>
         </div>
 
-        <footer> . </footer>
 
         </div>
     </main>
 
+    <div class="container">
+        <footer id="footer">
+            <p> arnav kapur / <time id="currentYear"></time></p>
+        </footer>
+        <script>
+            var currentYear = new Date().getFullYear();
+            document.getElementById('currentYear').textContent = currentYear;
+        </script>
+    </div>
 </body>
 
 </html>

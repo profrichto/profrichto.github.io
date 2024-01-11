@@ -118,6 +118,17 @@ h1 {
     font-weight: 450;
 }
 
+.text a {
+    text-decoration: underline;
+    color: #333;
+}
+
+.text a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #140084;
+}
+
 
 .lists {
     padding: 0 40%;
@@ -142,6 +153,12 @@ h1 {
 }
 
 .interests a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #140084;
+}
+
+#interests a:hover {
     font-weight: bold;
     text-decoration: underline;
     color: #140084;

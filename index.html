@@ -25,32 +25,41 @@
             </p>
 
         </div>
-        <!-- <div class="lists">
-            <ol>
-                <li>Hiking boots</li>
-                <li>Tents</li>
-            </ol>
-        </div> -->
         <img src="https://i.natgeofe.com/n/2dc54f0a-0786-4593-86b3-fd06a50d1851/everest-basecamp-life-er-camp_3x2.jpg"
             alt="Everest Base Camp" width="500px">
 
-        <br>
-
+        <br />
         <div class="container">
+
             <p class="interests_para">My interests are
-                <span class="interests"><a href="interests.html">information sciences, photosynthesis and
+                <span id="interests"><a href="interests.html">information sciences, photosynthesis, and
                         religion</a></span>.
             </p>
+            <script>
+                var interestsLink = document.getElementById('interests').querySelector('a');
+
+                interestsLink.addEventListener('mouseenter', function () {
+                    interestsLink.textContent = 'extending human intelligence and abilities, restoring our connection with the natural world, and fostering communities';
+                });
+
+                interestsLink.addEventListener('mouseleave', function () {
+                    interestsLink.textContent = 'information sciences, photosynthesis, and religion';
+                });
+            </script>
         </div>
         <div class="container">
-            <p class="text"><a href="mailto:arnavkapur@gmail.com">I'd love to hear from you</a>. </p>
+            <p class="text"><a href="mailto:arnavkapur@gmail.com">i'd love to hear from you</a>. </p>
     </main>
     <br>
-    <!-- <div class="container">
+    <div class="container">
         <footer id="footer">
-            <p>&copy; me, 2023</p>
+            <p> arnav kapur / <time id="currentYear"></time></p>
         </footer>
-    </div> -->
+        <script>
+            var currentYear = new Date().getFullYear();
+            document.getElementById('currentYear').textContent = currentYear;
+        </script>
+    </div>
 </body>
 
 </html>
