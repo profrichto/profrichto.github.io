@@ -193,6 +193,8 @@ h1 {
     padding: 0px;
 }
 
+.blog_list_title {
+    margin: 0px;
     padding: 0px;
 }
 
@@ -207,7 +209,7 @@ footer {
     text-align: center;
     font-size: smaller;
     padding: 5%;
-    background-color: #e0e0e0;
+    background-color: #e5e5e5;
     color: #333;
 }
 
