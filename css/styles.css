@@ -1,6 +1,6 @@
 body {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
     line-height: 1.4em;
     margin: 0;
@@ -23,6 +23,7 @@ p {
     margin: 0;
     padding-top: 0;
     padding-bottom: 20px;
+    font-size: medium;
 }
 
 .flex-container {
@@ -66,7 +67,7 @@ p {
 }
 
 .leftmargin {
-    font-size: smaller;
+    font-size: medium;
     text-align: right;
     color: #636363;
     max-width: 250px;
@@ -92,7 +93,7 @@ p {
 }
 
 #navbar a {
-    font-size: 14px;
+    font-size: 16px;
     padding: 0 5px;
 }
 
