@@ -182,6 +182,10 @@ h1 {
     color: blue;
 }
 
+#poster {
+    margin-left: 0%;
+}
+
 .blog_list li h2 {
     margin: 0px;
     margin-top: 20px;
@@ -206,10 +210,17 @@ code {
     border-radius: 5px;
 }
 
+main {
+    flex: 1;
+}
+
 footer {
+    position: relative;
+    padding-top: 15%;
+    left: 0;
+    bottom: 0;
     text-align: center;
     font-size: smaller;
-    padding: 5%;
     background-color: #f9f9f9;
     color: #333;
 }

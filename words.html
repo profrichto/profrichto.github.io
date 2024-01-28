@@ -29,14 +29,17 @@
                 <li>
                     <a href="interests.html">
                         <h2>"Information sciences, photosynthesis, and religion"</h2>
-                        <!-- <li>
-                    <a href="proof.html">
-                        <h2>Why is gradient useful?</h2>
-                    </a>
-                </li> -->
-            </ul>
+                        </a>
         </div>
     </main>
 </body>
-
+ <div class="container">
+        <footer id="footer">
+            <p> arnav kapur / <time id="currentYear"></time> </p>
+        </footer>
+        <script>
+            var currentYear = new Date().getFullYear();
+            document.getElementById('currentYear').textContent = currentYear;
+        </script>
+    </div>
 </html>
