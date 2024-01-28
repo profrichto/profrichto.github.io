@@ -100,6 +100,8 @@ p {
 
 #navbar a:hover {
     font-weight: bold;
+    background-color: #140084;
+    color: #fff;
     text-decoration: underline;
 }
 
@@ -128,7 +130,8 @@ h1 {
 .text a:hover {
     font-weight: bold;
     text-decoration: underline;
-    color: #140084;
+    background-color: #140084;
+    color: #fff;
 }
 
 
@@ -154,16 +157,12 @@ h1 {
     color: #140084;
 }
 
-.interests a:hover {
-    font-weight: bold;
-    text-decoration: underline;
-    color: #140084;
-}
 
 #interests a:hover {
     font-weight: bold;
     text-decoration: underline;
-    color: #140084;
+    background-color: #140084;
+    color: #fff;
 }
 
 
@@ -180,7 +179,7 @@ h1 {
 
 .blog_list li a:hover {
     text-decoration: underline;
-    color: #2600ff;
+    color: blue;
 }
 
 .blog_list li h2 {
