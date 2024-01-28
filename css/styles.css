@@ -183,7 +183,8 @@ h1 {
 }
 
 #poster {
-    margin-left: 0%;
+    display: block;
+    margin: 0 auto;
 }
 
 .blog_list li h2 {
