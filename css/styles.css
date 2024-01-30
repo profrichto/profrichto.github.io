@@ -1,4 +1,7 @@
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 16px;
     text-align: center;
