@@ -177,12 +177,16 @@ h1 {
 
 .blog_list li a {
     text-decoration: none;
-    color: #333;
+    /* color: #333; */
+    color: #140084;
+    /* color: blue; */
 }
 
 .blog_list li a:hover {
+    font-weight: bold;
     text-decoration: underline;
     color: blue;
+    /* color: blue; */
 }
 
 #poster {
