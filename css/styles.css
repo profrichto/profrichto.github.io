@@ -185,7 +185,7 @@ h1 {
 .blog_list li a:hover {
     font-weight: bold;
     text-decoration: underline;
-    color: blue;
+    color: rgb(0, 0, 211);
     /* color: blue; */
 }
 
